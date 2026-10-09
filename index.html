@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Konsumsi Acara</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigasi Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">Konsumsi<span>Event</span></div>
+      <div class="sidebar__tagline">Pendataan Harian Acara</div>
+    </div>
+    <nav class="sidebar__nav">
+      <ul>
+        <li><a href="index.html" class="active">Dashboard</a></li>
+        <li><a href="menu.html">Menu Makanan</a></li>
+        <li><a href="peserta.html">Data Pengambilan Peserta</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Konten Utama -->
+  <main class="main-content">
+    <h1 style="margin-bottom: 0.5rem;">Ringkasan Konsumsi Hari Ini</h1>
+    <p style="margin-bottom: 2rem; color: var(--navy-light);">Klik status pada tabel di bawah untuk langsung mengubah status pengambilan.</p>
+
+    <!-- Stat Ringkasan Peserta -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__title">Total Peserta</div>
+        <div class="stat-card__value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__title">Sudah Ambil Makan Siang</div>
+        <div class="stat-card__value" style="color: var(--sage-dark);" id="stat-siang-sudah">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__title">Belum Ambil Makan Siang</div>
+        <div class="stat-card__value" style="color: var(--terracotta);" id="stat-siang-belum">0</div>
+      </div>
+    </div>
+
+    <!-- Tabel Ringkasan Terakhir -->
+    <div class="table-container">
+      <h2 class="table-title">Status Pengambilan Makan Siang (Klik Badge untuk Ubah Status)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Peserta</th>
+            <th>Instansi / Divisi</th>
+            <th>Status Makan Siang</th>
+          </tr>
+        </thead>
+        <tbody id="dashboard-table-body">
+          <!-- Diisi otomatis oleh JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="app-data.js"></script>
+  <script>
+    const peserta = getPesertaData();
+    
+    // Update Statistik
+    document.getElementById('stat-total').innerText = peserta.length;
+    const sudahSiang = peserta.filter(p => p.siang).length;
+    document.getElementById('stat-siang-sudah').innerText = sudahSiang;
+    document.getElementById('stat-siang-belum').innerText = peserta.length - sudahSiang;
+
+    // Render Tabel Dashboard
+    const tbody = document.getElementById('dashboard-table-body');
+    tbody.innerHTML = peserta.map((p, idx) => `
+      <tr>
+        <td>${idx + 1}</td>
+        <td><strong>${p.nama}</strong></td>
+        <td>${p.divisi}</td>
+        <td>
+          <span class="badge ${p.siang ? 'badge--taken' : 'badge--pending'}" onclick="toggleStatus(${p.id}, 'siang')">
+            ${p.siang ? 'Sudah Ambil' : 'Belum Ambil'}
+          </span>
+        </td>
+      </tr>
+    `).join('');
+  </script>
+</body>
+</html>
