@@ -3,90 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Konsumsi Acara</title>
+  <title>Dashboard Konsumsi - IT FEST 6.0</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navigasi Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar__brand">
-      <div class="sidebar__logo">Konsumsi<span>Event</span></div>
-      <div class="sidebar__tagline">Pendataan Harian Acara</div>
+  <header>
+    <h1>🏝️ Pendataan Konsumsi IT FEST 6.0</h1>
+    <p>Divisi Konsumsi - Monitoring Panitia, Peserta & VVIP/Sponsor</p>
+  </header>
+
+  <nav>
+    <a href="index.html" class="active">Dashboard</a>
+    <a href="menu.html">Jadwal & Menu</a>
+    <a href="peserta.html">Checklist Konsumsi</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>📊 Ringkasan Pengambilan Hari Ini</h2>
+      <div class="grid-3">
+        <div class="stat-box">
+          <h3>Panitia (Siang & Sore)</h3>
+          <div class="count" id="stat-panitia">0 / 0</div>
+          <small>Divisi Sudah Ambil</small>
+        </div>
+        <div class="stat-box">
+          <h3>Snack Peserta (Hari 2)</h3>
+          <div class="count" id="stat-peserta">0 / 0</div>
+          <small>Box Terdistribusi</small>
+        </div>
+        <div class="stat-box">
+          <h3>VVIP (Narasumber/Sponsor)</h3>
+          <div class="count" id="stat-vvip">0 / 0</div>
+          <small>Paket Disajikan</small>
+        </div>
+      </div>
     </div>
-    <nav class="sidebar__nav">
-      <ul>
-        <li><a href="index.html" class="active">Dashboard</a></li>
-        <li><a href="menu.html">Menu Makanan</a></li>
-        <li><a href="peserta.html">Data Pengambilan Peserta</a></li>
+
+    <div class="card">
+      <h2>📋 Alur Kerja Divisi Konsumsi (3 Hari Acara)</h2>
+      <ul style="padding-left: 20px;">
+        <li><b>Setiap Hari (Day 1 - 3):</b> Terima Makanan Siang & Sore Panitia $\rightarrow$ Pisahkan per Divisi $\rightarrow$ Koor Divisi Ambil & Checklist.</li>
+        <li><b>Hari ke-2 Khusus:</b> Pendataan & Pembagian Snack Peserta.</li>
+        <li><b>Hari ke-1 & ke-2 Khusus:</b> Penyediaan Makanan & Snack VVIP (Narasumber, Sponsor, Partnership).</li>
       </ul>
-    </nav>
-  </aside>
-
-  <!-- Konten Utama -->
-  <main class="main-content">
-    <h1 style="margin-bottom: 0.5rem;">Ringkasan Konsumsi Hari Ini</h1>
-    <p style="margin-bottom: 2rem; color: var(--navy-light);">Klik status pada tabel di bawah untuk langsung mengubah status pengambilan.</p>
-
-    <!-- Stat Ringkasan Peserta -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-card__title">Total Peserta</div>
-        <div class="stat-card__value" id="stat-total">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__title">Sudah Ambil Makan Siang</div>
-        <div class="stat-card__value" style="color: var(--sage-dark);" id="stat-siang-sudah">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__title">Belum Ambil Makan Siang</div>
-        <div class="stat-card__value" style="color: var(--terracotta);" id="stat-siang-belum">0</div>
-      </div>
     </div>
+  </div>
 
-    <!-- Tabel Ringkasan Terakhir -->
-    <div class="table-container">
-      <h2 class="table-title">Status Pengambilan Makan Siang (Klik Badge untuk Ubah Status)</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Nama Peserta</th>
-            <th>Instansi / Divisi</th>
-            <th>Status Makan Siang</th>
-          </tr>
-        </thead>
-        <tbody id="dashboard-table-body">
-          <!-- Diisi otomatis oleh JavaScript -->
-        </tbody>
-      </table>
-    </div>
-  </main>
+  <footer>
+    <p>© 2026 Panitia IT FEST 6.0 - Divisi Konsumsi</p>
+  </footer>
 
   <script src="app-data.js"></script>
-  <script>
-    const peserta = getPesertaData();
-    
-    // Update Statistik
-    document.getElementById('stat-total').innerText = peserta.length;
-    const sudahSiang = peserta.filter(p => p.siang).length;
-    document.getElementById('stat-siang-sudah').innerText = sudahSiang;
-    document.getElementById('stat-siang-belum').innerText = peserta.length - sudahSiang;
-
-    // Render Tabel Dashboard
-    const tbody = document.getElementById('dashboard-table-body');
-    tbody.innerHTML = peserta.map((p, idx) => `
-      <tr>
-        <td>${idx + 1}</td>
-        <td><strong>${p.nama}</strong></td>
-        <td>${p.divisi}</td>
-        <td>
-          <span class="badge ${p.siang ? 'badge--taken' : 'badge--pending'}" onclick="toggleStatus(${p.id}, 'siang')">
-            ${p.siang ? 'Sudah Ambil' : 'Belum Ambil'}
-          </span>
-        </td>
-      </tr>
-    `).join('');
-  </script>
 </body>
 </html>
