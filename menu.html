@@ -3,60 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu Makanan Harian</title>
+  <title>Jadwal Menu - IT FEST 6.0</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div class="sidebar__brand">
-      <div class="sidebar__logo">Konsumsi<span>Event</span></div>
-      <div class="sidebar__tagline">Pendataan Harian Acara</div>
+  <header>
+    <h1>🍱 Jadwal Menu Makanan & Snack</h1>
+    <p>IT FEST 6.0 - Divisi Konsumsi</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="menu.html" class="active">Jadwal & Menu</a>
+    <a href="peserta.html">Checklist Konsumsi</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>📅 Jadwal Menu 3 Hari</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Hari</th>
+            <th>Kategori Target</th>
+            <th>Sesi Makanan</th>
+            <th>Menu / Item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hari 1</td>
+            <td>Panitia</td>
+            <td>Siang & Sore</td>
+            <td>Nasi Ayam Bumbu Bali / Nasi Rendang</td>
+          </tr>
+          <tr>
+            <td>Hari 1</td>
+            <td>VVIP & Sponsor</td>
+            <td>Snack & Makan Siang</td>
+            <td>Prasmanan Premium + Fruit Tea & Pastry</td>
+          </tr>
+          <tr>
+            <td>Hari 2</td>
+            <td>Panitia</td>
+            <td>Siang & Sore</td>
+            <td>Nasi Ayam Goreng Mentega / Nasi Telur Balado</td>
+          </tr>
+          <tr>
+            <td>Hari 2</td>
+            <td>Peserta</td>
+            <td>Snack Siang</td>
+            <td>Roti Bakery, Lemper & Teh Kotak</td>
+          </tr>
+          <tr>
+            <td>Hari 2</td>
+            <td>VVIP & Sponsor</td>
+            <td>Snack & Makan Siang</td>
+            <td>Prasmanan Premium + Coffee Break</td>
+          </tr>
+          <tr>
+            <td>Hari 3</td>
+            <td>Panitia</td>
+            <td>Siang & Sore</td>
+            <td>Nasi Chicken Katsu / Nasi Bakar Ayam</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <nav class="sidebar__nav">
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="menu.html" class="active">Menu Makanan</a></li>
-        <li><a href="peserta.html">Data Pengambilan Peserta</a></li>
-      </ul>
-    </nav>
-  </aside>
+  </div>
 
-  <main class="main-content">
-    <h1 style="margin-bottom: 0.5rem;">Jadwal Menu Makanan & Snack</h1>
-    <p style="margin-bottom: 2rem; color: var(--navy-light);">Klik tombol "Ubah Menu" untuk memperbarui daftar makanan harian.</p>
+  <footer>
+    <p>© 2026 Panitia IT FEST 6.0 - Divisi Konsumsi</p>
+  </footer>
 
-    <div class="menu-grid" id="menu-container">
-      <!-- Diisi otomatis oleh JavaScript -->
-    </div>
-  </main>
-
-  <script src="app-data.js"></script>
-  <script>
-    function renderMenu() {
-      const menu = getMenuData();
-      const container = document.getElementById('menu-container');
-      container.innerHTML = Object.keys(menu).map(key => `
-        <div class="menu-card" style="${key.includes('snack') ? 'border-top-color: var(--sage);' : ''}">
-          <span class="menu-card__tag">${menu[key].jam}</span>
-          <h3 class="menu-card__title">${menu[key].nama}</h3>
-          <p class="menu-card__text" id="text-${key}">${menu[key].isi}</p>
-          <button class="btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="editMenu('${key}')">✏️ Ubah Menu</button>
-        </div>
-      `).join('');
-    }
-
-    function editMenu(key) {
-      const menu = getMenuData();
-      const menuBaru = prompt(`Masukkan hidangan baru untuk ${menu[key].nama}:`, menu[key].isi);
-      if (menuBaru !== null && menuBaru.trim() !== "") {
-        menu[key].isi = menuBaru.trim();
-        saveMenuData(menu);
-        renderMenu();
-      }
-    }
-
-    renderMenu();
-  </script>
 </body>
 </html>
