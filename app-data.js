@@ -1,6 +1,4 @@
-// Data Awal Bawaan IT FEST 6.0 (Divisi Panitia & Target Lainnya)
 const defaultData = [
-  // --- DIVISI PANITIA (Makan Siang / Sore) ---
   { id: 1, target: "Ketua", kategori: "Panitia Siang", koor: "Ketua Panitia", porsi: 1, taken: false },
   { id: 2, target: "Sekretaris", kategori: "Panitia Siang", koor: "Koor Sekre", porsi: 2, taken: false },
   { id: 3, target: "Steering Committee (SC)", kategori: "Panitia Siang", koor: "Koor SC", porsi: 2, taken: false },
@@ -13,30 +11,24 @@ const defaultData = [
   { id: 10, target: "Divisi Lomba", kategori: "Panitia Siang", koor: "Koor Lomba", porsi: 7, taken: false },
   { id: 11, target: "Divisi Konsumsi", kategori: "Panitia Siang", koor: "Koor Konsum", porsi: 9, taken: false },
   { id: 12, target: "Divisi Acara", kategori: "Panitia Siang", koor: "Koor Acara", porsi: 5, taken: false },
-
-  // --- TARGET LAINNYA ---
-  { id: 13, target: "Narasumber Workshop", kategori: "VVIP/Sponsor", koor: "Pak Alex", porsi: 3, taken: true },
-  { id: 14, target: "Sponsor Platinum", kategori: "VVIP/Sponsor", koor: "Mba Sarah", porsi: 5, taken: false },
-  { id: 15, target: "Peserta Ruang A", kategori: "Peserta Snack", koor: "Koor R.A", porsi: 50, taken: false }
+  { id: 13, target: "Narasumber Workshop", kategori: "VVIP/Sponsor", koor: "Divisi Konsumsi", porsi: 3, taken: true },
+  { id: 14, target: "Sponsor Platinum", kategori: "VVIP/Sponsor", koor: "Divisi Konsumsi", porsi: 5, taken: false },
+  { id: 15, target: "Peserta Ruang A", kategori: "Peserta Snack", koor: "Divisi Konsumsi", porsi: 50, taken: false }
 ];
 
-// Ambil data dari LocalStorage atau pakai defaultData
 function getConsumptionData() {
   const saved = localStorage.getItem('itfest_konsumsi');
   return saved ? JSON.parse(saved) : defaultData;
 }
 
-// Simpan data ke LocalStorage
 function saveData(data) {
   localStorage.setItem('itfest_konsumsi', JSON.stringify(data));
   renderAll();
 }
 
-// Tampilkan data ke tabel & update angka di dashboard
 function renderAll() {
   const data = getConsumptionData();
   
-  // Render Tabel jika di Halaman peserta.html
   const tabel = document.getElementById('tabel-konsumsi');
   if (tabel) {
     tabel.innerHTML = '';
@@ -62,7 +54,6 @@ function renderAll() {
     });
   }
 
-  // Render Statistik jika di Halaman index.html
   const statPanitia = document.getElementById('stat-panitia');
   const statPeserta = document.getElementById('stat-peserta');
   const statVvip = document.getElementById('stat-vvip');
