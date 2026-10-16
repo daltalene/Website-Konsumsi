@@ -17,12 +17,12 @@ const defaultData = [
 ];
 
 function getConsumptionData() {
-  const saved = localStorage.getItem('itfest_konsumsi');
+  const saved = localStorage.getItem('itfest_konsumsi_v2');
   return saved ? JSON.parse(saved) : defaultData;
 }
 
 function saveData(data) {
-  localStorage.setItem('itfest_konsumsi', JSON.stringify(data));
+  localStorage.setItem('itfest_konsumsi_v2', JSON.stringify(data));
   renderAll();
 }
 
