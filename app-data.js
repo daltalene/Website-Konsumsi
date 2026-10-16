@@ -1,56 +1,119 @@
-// Inisialisasi Data Awal di localStorage jika belum ada
-const defaultPeserta = [
-  { id: 1, nama: "Farrell Alvaro", divisi: "Panitia", pagi: true, siang: true, malam: false },
-  { id: 2, nama: "Clarissa Daltalene", divisi: "Panitia", pagi: true, siang: true, malam: false },
-  { id: 3, nama: "Naflah Keumala", divisi: "Panitia", pagi: true, siang: false, malam: false },
-  { id: 4, nama: "Pak Levi", divisi: "VIP", pagi: false, siang: false, malam: false },
-  { id: 5, nama: "Adzkia Zafira", divisi: "Peserta", pagi: false, siang: false, malam: false },
-  { id: 6, nama: "Shaskia Fitri", divisi: "Peserta", pagi: false, siang: false, malam: false }
+// Data Awal Bawaan IT FEST 6.0 (Divisi Panitia & Target Lainnya)
+const defaultData = [
+  // --- DIVISI PANITIA (Makan Siang / Sore) ---
+  { id: 1, target: "Ketua", kategori: "Panitia Siang", koor: "Ketua Panitia", porsi: 1, taken: false },
+  { id: 2, target: "Sekretaris", kategori: "Panitia Siang", koor: "Koor Sekre", porsi: 2, taken: false },
+  { id: 3, target: "Steering Committee (SC)", kategori: "Panitia Siang", koor: "Koor SC", porsi: 2, taken: false },
+  { id: 4, target: "Bendahara", kategori: "Panitia Siang", koor: "Koor Bendahara", porsi: 2, taken: false },
+  { id: 5, target: "Divisi Humas", kategori: "Panitia Siang", koor: "Koor Humas", porsi: 10, taken: false },
+  { id: 6, target: "Divisi Kreatif", kategori: "Panitia Siang", koor: "Koor Kreatif", porsi: 6, taken: false },
+  { id: 7, target: "Divisi Fun Game", kategori: "Panitia Siang", koor: "Koor Fun Game", porsi: 4, taken: false },
+  { id: 8, target: "Divisi Expo", kategori: "Panitia Siang", koor: "Koor Expo", porsi: 5, taken: false },
+  { id: 9, target: "Divisi Logistik", kategori: "Panitia Siang", koor: "Koor Logis", porsi: 7, taken: false },
+  { id: 10, target: "Divisi Lomba", kategori: "Panitia Siang", koor: "Koor Lomba", porsi: 7, taken: false },
+  { id: 11, target: "Divisi Konsumsi", kategori: "Panitia Siang", koor: "Koor Konsum", porsi: 9, taken: false },
+  { id: 12, target: "Divisi Acara", kategori: "Panitia Siang", koor: "Koor Acara", porsi: 5, taken: false },
+
+  // --- TARGET LAINNYA ---
+  { id: 13, target: "Narasumber Workshop", kategori: "VVIP/Sponsor", koor: "Pak Alex", porsi: 3, taken: true },
+  { id: 14, target: "Sponsor Platinum", kategori: "VVIP/Sponsor", koor: "Mba Sarah", porsi: 5, taken: false },
+  { id: 15, target: "Peserta Ruang A", kategori: "Peserta Snack", koor: "Koor R.A", porsi: 50, taken: false }
 ];
 
-const defaultMenu = {
-  pagi: { jam: "07:00 - 08:00 WIB", nama: "Makan Pagi", isi: "Nasi Uduk Komplit, Ayam Goreng, Telur Balado, Kerupuk, & Teh Hangat." },
-  snackPagi: { jam: "10:00 WIB", nama: "Snack Pagi", isi: "Kue Lemper Ayam, Pastel Pastry, & Kopi/Teh." },
-  siang: { jam: "12:00 - 13:00 WIB", nama: "Makan Siang", isi: "Nasi Putih, Rendang Daging, Sayur Sop, Tahu/Tempe, & Buah Semangka." },
-  snackSore: { jam: "15:30 WIB", nama: "Snack Sore", isi: "Roti Bakar Cokelat Keju & Jus Jeruk Segar." },
-  malam: { jam: "18:30 - 19:30 WIB", nama: "Makan Malam", isi: "Nasi Putih, Ikan Bakar Jimbaran, Capcay Seafood, Sambal, & Melon." }
-};
-
-function getPesertaData() {
-  const data = localStorage.getItem('peserta_konsumsi');
-  return data ? JSON.parse(data) : defaultPeserta;
+// Ambil data dari LocalStorage atau pakai defaultData
+function getConsumptionData() {
+  const saved = localStorage.getItem('itfest_konsumsi');
+  return saved ? JSON.parse(saved) : defaultData;
 }
 
-function savePesertaData(data) {
-  localStorage.setItem('peserta_konsumsi', JSON.stringify(data));
+// Simpan data ke LocalStorage
+function saveData(data) {
+  localStorage.setItem('itfest_konsumsi', JSON.stringify(data));
+  renderAll();
 }
 
-function getMenuData() {
-  const data = localStorage.getItem('menu_konsumsi');
-  return data ? JSON.parse(data) : defaultMenu;
-}
+// Tampilkan data ke tabel & update angka di dashboard
+function renderAll() {
+  const data = getConsumptionData();
+  
+  // Render Tabel jika di Halaman peserta.html
+  const tabel = document.getElementById('tabel-konsumsi');
+  if (tabel) {
+    tabel.innerHTML = '';
+    data.forEach((item, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><b>${item.target}</b></td>
+        <td>${item.kategori}</td>
+        <td>${item.koor}</td>
+        <td><b>${item.porsi}</b> Porsi</td>
+        <td>
+          <span class="badge ${item.taken ? 'badge-done' : 'badge-pending'}">
+            ${item.taken ? 'Sudah Diambil' : 'Belum Diambil'}
+          </span>
+        </td>
+        <td>
+          <button class="btn-check ${item.taken ? 'done' : ''}" onclick="toggleStatus(${index})">
+            ${item.taken ? 'Batal' : 'Checklist'}
+          </button>
+        </td>
+      `;
+      tabel.appendChild(tr);
+    });
+  }
 
-function saveMenuData(data) {
-  localStorage.setItem('menu_konsumsi', JSON.stringify(data));
-}
+  // Render Statistik jika di Halaman index.html
+  const statPanitia = document.getElementById('stat-panitia');
+  const statPeserta = document.getElementById('stat-peserta');
+  const statVvip = document.getElementById('stat-vvip');
 
-// Fungsi Mengubah Status Pengambilan (Klik Badge)
-function toggleStatus(pesertaId, sesi) {
-  let pesertaList = getPesertaData();
-  const index = pesertaList.findIndex(p => p.id === pesertaId);
-  if (index !== -1) {
-    pesertaList[index][sesi] = !pesertaList[index][sesi];
-    savePesertaData(pesertaList);
-    location.reload(); // Refresh untuk memperbarui tampilan & stat
+  if (statPanitia && statPeserta && statVvip) {
+    const panitia = data.filter(d => d.kategori.includes('Panitia'));
+    const peserta = data.filter(d => d.kategori.includes('Peserta'));
+    const vvip = data.filter(d => d.kategori.includes('VVIP'));
+
+    statPanitia.innerText = `${panitia.filter(d => d.taken).length} / ${panitia.length}`;
+    statPeserta.innerText = `${peserta.filter(d => d.taken).length} / ${peserta.length}`;
+    statVvip.innerText = `${vvip.filter(d => d.taken).length} / ${vvip.length}`;
   }
 }
 
-// Fungsi Hapus Peserta
-function hapusPeserta(pesertaId) {
-  if (confirm("Apakah Anda yakin ingin menghapus peserta ini?")) {
-    let pesertaList = getPesertaData();
-    pesertaList = pesertaList.filter(p => p.id !== pesertaId);
-    savePesertaData(pesertaList);
-    location.reload();
-  }
+// Ubah status pengambilan (Checklist / Batal)
+function toggleStatus(index) {
+  const data = getConsumptionData();
+  data[index].taken = !data[index].taken;
+  saveData(data);
 }
+
+// Tambah data baru dari form
+function tambahData() {
+  const target = document.getElementById('input-nama').value;
+  const kategori = document.getElementById('input-kategori').value;
+  const koor = document.getElementById('input-koor').value;
+  const porsi = document.getElementById('input-porsi').value;
+
+  if (!target || !koor || !porsi) {
+    alert('Harap isi semua kolom data!');
+    return;
+  }
+
+  const data = getConsumptionData();
+  data.push({
+    id: Date.now(),
+    target: target,
+    kategori: kategori,
+    koor: koor,
+    porsi: parseInt(porsi),
+    taken: false
+  });
+
+  saveData(data);
+
+  // Clear Form Input
+  document.getElementById('input-nama').value = '';
+  document.getElementById('input-koor').value = '';
+  document.getElementById('input-porsi').value = '';
+}
+
+// Jalankan saat halaman di-load
+document.addEventListener('DOMContentLoaded', renderAll);
