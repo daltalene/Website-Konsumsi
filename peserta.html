@@ -10,7 +10,7 @@
 
   <header>
     <h1>📝 Checklist Pengambilan Makanan</h1>
-    <p>IT FEST 6.0 - Pendataan Realtime Koor Divisi & Target</p>
+    <p>IT FEST 6.0 - Pendataan Divisi Panitia, Peserta & VVIP/Sponsor</p>
   </header>
 
   <nav>
@@ -21,36 +21,142 @@
 
   <div class="container">
     <div class="card">
-      <h2>➕ Tambah Data Distribusi Baru</h2>
-      <div class="form-group">
-        <input type="text" id="input-nama" placeholder="Nama Divisi / Target (misal: Divisi Acara)">
-        <select id="input-kategori">
-          <option value="Panitia Siang">Panitia - Makan Siang</option>
-          <option value="Panitia Sore">Panitia - Makan Sore</option>
-          <option value="Peserta Snack">Peserta - Snack (Hari 2)</option>
-          <option value="VVIP/Sponsor">VVIP / Narasumber / Sponsor</option>
-        </select>
-        <input type="text" id="input-koor" placeholder="Nama Koor / Penerima">
-        <input type="number" id="input-porsi" placeholder="Jumlah Porsi">
-        <button class="btn-check" onclick="tambahData()">Tambah Data</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Daftar Status Pengambilan</h2>
+      <h2>Daftar Status Pengambilan Makanan (Lengkap)</h2>
       <table>
         <thead>
           <tr>
+            <th>No</th>
             <th>Divisi / Target</th>
             <th>Kategori & Sesi</th>
             <th>Koor / Penerima</th>
-            <th>Porsi</th>
-            <th>Status</th>
-            <th>Aksi</th>
+            <th>Jumlah Porsi</th>
+            <th>Status Pengambilan</th>
           </tr>
         </thead>
-        <tbody id="tabel-konsumsi">
-          <!-- Data diisi otomatis lewat app-data.js -->
+        <tbody>
+          <!-- PANITIA -->
+          <tr>
+            <td>1</td>
+            <td><b>Ketua Panitia</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Ketua Panitia</td>
+            <td><b>1</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><b>Sekretaris</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Sekre</td>
+            <td><b>2</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><b>Steering Committee (SC)</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor SC</td>
+            <td><b>2</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><b>Bendahara</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Bendahara</td>
+            <td><b>2</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><b>Divisi Humas</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Humas</td>
+            <td><b>10</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><b>Divisi Kreatif</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Kreatif</td>
+            <td><b>6</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><b>Divisi Fun Game</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Fun Game</td>
+            <td><b>4</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><b>Divisi Expo</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Expo</td>
+            <td><b>5</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><b>Divisi Logistik</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Logis</td>
+            <td><b>7</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><b>Divisi Lomba</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Lomba</td>
+            <td><b>7</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><b>Divisi Konsumsi</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Konsum</td>
+            <td><b>9</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><b>Divisi Acara</b></td>
+            <td>Panitia Siang & Sore</td>
+            <td>Koor Acara</td>
+            <td><b>5</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+
+          <!-- VVIP / SPONSOR / PESERTA -->
+          <tr>
+            <td>13</td>
+            <td><b>Narasumber Workshop</b></td>
+            <td>VVIP / Sponsor</td>
+            <td>Divisi Konsumsi</td>
+            <td><b>3</b> Porsi</td>
+            <td><span class="badge badge-done">Sudah Diambil</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><b>Sponsor Platinum</b></td>
+            <td>VVIP / Sponsor</td>
+            <td>Divisi Konsumsi</td>
+            <td><b>5</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><b>Peserta Ruang A & B</b></td>
+            <td>Peserta (Snack Box)</td>
+            <td>Divisi Konsumsi</td>
+            <td><b>50</b> Porsi</td>
+            <td><span class="badge badge-pending">Belum Diambil</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -60,6 +166,5 @@
     <p>© 2026 Panitia IT FEST 6.0 - Divisi Konsumsi</p>
   </footer>
 
-  <script src="app-data.js"></script>
 </body>
 </html>
